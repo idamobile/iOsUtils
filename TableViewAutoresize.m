@@ -23,10 +23,16 @@
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
   self = [super initWithCoder:(NSCoder *)aDecoder];
-  if( self ) {
-    [NSNotificationCenter addKeyboardObserver:self];    
+  if( !self ) {
+    return nil;
   }
+  [NSNotificationCenter addKeyboardObserver:self];
   return self;
+}
+
+-(void)awakeFromNib
+{
+  [NSNotificationCenter addKeyboardObserver:self];
 }
 
 -(void)dealloc
@@ -58,8 +64,10 @@
 
 -(void)keyboardWillHide:(NSNotification*)notification
 {
-  self.height = self.heightNoKeyboard;
-  self.heightNoKeyboard = 0;
+  if( self.heightNoKeyboard ) {
+    self.height = self.heightNoKeyboard;
+    self.heightNoKeyboard = 0;
+  }
 }
 
 @end
