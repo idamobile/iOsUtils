@@ -1,24 +1,24 @@
 //
-//  TableViewAutoresize.m
-//  Home Credit
+//  ScrollViewAutoresize.m
+//  Instabank
 //
-//  Created by Aleksey Kozhevnikov on 06.06.12.
+//  Created by Aleksey Kozhevnikov on 25.09.12.
 //  Copyright (c) 2012 iDa Mobile. All rights reserved.
 //
 
-#import "TableViewAutoresize.h"
+#import "ScrollViewAutoresize.h"
 #import "NSNotification+iOsUtils.h"
 #import "UIView+iOsUtils.h"
 
-@interface TableViewAutoresize () <KeyboardObserverDelegate>
+@interface ScrollViewAutoresize () <KeyboardObserverDelegate>
 
 @property(nonatomic, assign) CGFloat heightNoKeyboard;
 
 @end
 
-@implementation TableViewAutoresize
+@implementation ScrollViewAutoresize
 
-@synthesize heightNoKeyboard, autoresizeDelegate;
+@synthesize heightNoKeyboard;
 
 -(void)awakeFromNib
 {
@@ -34,22 +34,12 @@
 -(void)keyboardDidShow:(NSNotification*)notification
 {
   if( !self.heightNoKeyboard ) {
-      self.heightNoKeyboard = self.height; 
+    self.heightNoKeyboard = self.height;
   }
   CGRect keyboardFrame;
   [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardFrame];
-  // If converting to self gives strange results for table with scroll, so superview.
   keyboardFrame = [self.window convertRect:keyboardFrame toView:self.superview];
   self.height = MIN( self.heightNoKeyboard, CGRectGetMinY( keyboardFrame ) - CGRectGetMinY( self.frame ) );
-  // Scroll if needed
-  if( [self.autoresizeDelegate respondsToSelector:@selector(scrollingPathIn:)] ) {
-      NSIndexPath* scrollingPath = [self.autoresizeDelegate scrollingPathIn:self];
-      if( scrollingPath ) {
-          [self scrollToRowAtIndexPath:scrollingPath
-                      atScrollPosition:UITableViewScrollPositionTop
-                              animated:YES];
-      }
-  }
 }
 
 -(void)keyboardWillHide:(NSNotification*)notification
