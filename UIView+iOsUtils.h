@@ -6,7 +6,7 @@
 //  Copyright (c) 2011 iDa Mobile. All rights reserved.
 //
 
-@interface UIView(MiscUtils)
+@interface UIView(iOsUtils)
 
 @property(nonatomic, assign) CGFloat x;
 @property(nonatomic, assign) CGFloat y;
