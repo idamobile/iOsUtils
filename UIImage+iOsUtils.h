@@ -10,4 +10,6 @@
 
 +(UIImage*)stretchableImageNamed:(NSString*)name;
 
++(UIImage*)safeImageNamed:(NSString*)name;
+
 @end

@@ -14,7 +14,7 @@
 {
 	UIImage *img = [UIImage imageNamed:name];
 	if( !img ) {
-		NSLog( @"Warning: image named %@ was not found in the main bundle", name );
+		DLog( @"Warning: image named %@ was not found in the main bundle", name );
 		return nil;
 	}
 	
@@ -28,6 +28,15 @@
   } else {
     return [img stretchableImageWithLeftCapWidth:( sz.width / 2 ) topCapHeight:( sz.height / 2 )];
   }
+}
+
++(UIImage*)safeImageNamed:(NSString*)imageName
+{
+  UIImage* image = [UIImage imageNamed:imageName];
+  if( !image ) {
+    DLog( @"Failed to load image named %@", imageName );
+  }
+  return image;
 }
 
 @end
