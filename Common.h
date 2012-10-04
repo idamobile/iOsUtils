@@ -18,3 +18,9 @@
 #else
 #	define DLog(...)
 #endif
+
+#ifdef DEBUG
+#	define DAssert(condition, desc, ...) NSAssert(condition, desc, ##__VA_ARGS__);
+#else
+#	define DAssert(...)
+#endif
