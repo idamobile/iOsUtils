@@ -25,4 +25,7 @@
 -(void)centerHorizontallyInContainer;
 -(void)centerVerticallyInContainer;
 
++(UIView*)loadFromNibNamed:(NSString*)nibName owner:(id)owner options:(NSDictionary*)opts;
++(UIView*)loadFromNib;
+
 @end

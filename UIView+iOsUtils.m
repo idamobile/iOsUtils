@@ -8,6 +8,8 @@
 //
 
 #import "UIView+iOsUtils.h"
+#import "UIDevice+iOsUtils.h"
+#import "CustomFonts.h"
 
 @implementation UIView(iOsUtils)
 
@@ -139,6 +141,42 @@
 {
 	CGRect rcContainer = self.superview.bounds;
 	self.y = floorf( ( rcContainer.size.height - self.height ) / 2 );
+}
+
++(UIView*)loadFromNibNamed:(NSString*)nibName owner:(id)owner options:(NSDictionary*)opts
+{	
+  NSString* deviceSpecific = nil;
+  if( [UIDevice isPad] ) {
+    deviceSpecific = [nibName stringByAppendingString:@"~iPad"];
+  } else {
+    deviceSpecific = [nibName stringByAppendingString:@"~iPhone"];
+  }
+	
+  NSString* chosenPath = nil;
+  if( [[NSBundle mainBundle] pathForResource:deviceSpecific ofType:@"nib"] ) {
+    chosenPath = deviceSpecific;
+  } else if( [[NSBundle mainBundle] pathForResource:nibName ofType:@"nib"] ) {
+    chosenPath = nibName;
+  } else {
+    DLog( @"Nib named %@ not found", nibName );
+    return nil;
+  }
+  
+  NSArray* nibViews = [[NSBundle mainBundle] loadNibNamed:chosenPath owner:owner options:opts];
+  for( NSObject* currentObject in nibViews ) {
+    if( [currentObject isKindOfClass:self] ) {
+      [CustomFonts replaceFontsOnView:(UIView*)currentObject];
+      return (UIView*)currentObject;
+    }
+  }
+
+  DLog( @"Nib named %@ doesn't contain a view of class %@", nibName, NSStringFromClass( self ) );
+  return nil;
+}
+
++(UIView*)loadFromNib
+{
+  return [self loadFromNibNamed:NSStringFromClass(self) owner:nil options:nil];
 }
 
 @end
