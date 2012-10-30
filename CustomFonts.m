@@ -35,47 +35,47 @@
 
 +(void)setSizeCorrection:(NSInteger)sizeCorrection
 {
-  [self sharedCustomFonts].sizeCorrection = sizeCorrection;
+  self.sharedCustomFonts.sizeCorrection = sizeCorrection;
 }
 
 +(void)setRegularFont:(UIFont*)regularFont
 {
-  [self sharedCustomFonts].regularFont = regularFont;
+  self.sharedCustomFonts.regularFont = regularFont;
 }
 
 +(void)setRegularInputFont:(UIFont*)regularInputFont
 {
-  [self sharedCustomFonts].regularInputFont = regularInputFont;
+  self.sharedCustomFonts.regularInputFont = regularInputFont;
 }
 
 +(void)setBoldFont:(UIFont*)boldFont
 {
-  [self sharedCustomFonts].boldFont = boldFont;
+  self.sharedCustomFonts.boldFont = boldFont;
 }
 
 +(void)setBoldInputFont:(UIFont*)boldInputFont
 {
-  [self sharedCustomFonts].boldInputFont = boldInputFont;
+  self.sharedCustomFonts.boldInputFont = boldInputFont;
 }
 
 +(UIFont*)regularFontOfSize:(float)pt
 {
-	return [[self sharedCustomFonts].regularFont fontWithSize:pt + [self sharedCustomFonts].sizeCorrection];
+	return [self.sharedCustomFonts.regularFont fontWithSize:pt + self.sharedCustomFonts.sizeCorrection];
 }
 
 +(UIFont*)regularInputFontOfSize:(float)pt
 {
-  return [[self sharedCustomFonts].regularInputFont fontWithSize:pt + [self sharedCustomFonts].sizeCorrection];
+  return [self.sharedCustomFonts.regularInputFont fontWithSize:pt + self.sharedCustomFonts.sizeCorrection];
 }
 
 +(UIFont*)boldFontOfSize:(float)pt
 {
-	return [[self sharedCustomFonts].boldFont fontWithSize:pt + [self sharedCustomFonts].sizeCorrection];
+	return [self.sharedCustomFonts.boldFont fontWithSize:pt + self.sharedCustomFonts.sizeCorrection];
 }
 
 +(UIFont*)boldInputFontOfSize:(float)pt
 {
-	return [[self sharedCustomFonts].boldInputFont fontWithSize:pt + [self sharedCustomFonts].sizeCorrection];
+	return [self.sharedCustomFonts.boldInputFont fontWithSize:pt + self.sharedCustomFonts.sizeCorrection];
 }
 
 +(UIFont*)produceCustomFont:(UIFont*)oldFont

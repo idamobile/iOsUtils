@@ -28,7 +28,6 @@
 -(void)dealloc
 {
   [NSNotificationCenter removeKeyboardObserver:self];
-  [super dealloc];
 }
 
 -(void)keyboardDidShow:(NSNotification*)notification

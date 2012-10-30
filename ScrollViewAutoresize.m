@@ -28,7 +28,6 @@
 -(void)dealloc
 {
   [NSNotificationCenter removeKeyboardObserver:self];
-  [super dealloc];
 }
 
 -(void)keyboardDidShow:(NSNotification*)notification
@@ -39,7 +38,7 @@
   CGRect keyboardFrame;
   [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardFrame];
   keyboardFrame = [self.window convertRect:keyboardFrame toView:self.superview];
-  self.height = MIN( self.heightNoKeyboard, CGRectGetMinY( keyboardFrame ) - CGRectGetMinY( self.frame ) );
+  self.height = MIN(self.heightNoKeyboard, CGRectGetMinY(keyboardFrame) - CGRectGetMinY(self.frame));
 }
 
 -(void)keyboardWillHide:(NSNotification*)notification
