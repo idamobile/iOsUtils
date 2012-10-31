@@ -10,7 +10,7 @@
 
 @interface ACAccountStore(iOsUtils)
 
-// Does nothing on iOS < 6.0
+// Only calls completion on iOS < 6.0
 +(void)syncFbAccountCompletion:(void (^)())completion;
 
 @end
