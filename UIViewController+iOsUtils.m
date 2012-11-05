@@ -22,7 +22,11 @@
 -(void)dismissSelfAnimated:(BOOL)flag
 {
   if( self.navigationController && self.navigationController.topViewController == self ) {
-    [self.navigationController popViewControllerAnimated:flag];
+    if( self.navigationController.viewControllers.count == 1 ) {
+      [self.navigationController dismissSelfAnimated:flag];
+    } else {
+      [self.navigationController popViewControllerAnimated:flag];
+    }
   } else if( self.presentingViewController && self.presentingViewController.presentedViewController == self ) {
     [self dismissViewControllerAnimated:flag completion:^{}];
   }
