@@ -21,6 +21,8 @@
       [accountStore renewCredentialsForAccount:fbAccount completion:^(ACAccountCredentialRenewResult renewResult, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), completion);
       }];
+    } else {
+      dispatch_async(dispatch_get_main_queue(), completion);      
     }
   } else {
     dispatch_async(dispatch_get_main_queue(), completion);
