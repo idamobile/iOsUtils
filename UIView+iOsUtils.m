@@ -143,6 +143,27 @@
 	self.y = floorf( ( rcContainer.size.height - self.height ) / 2 );
 }
 
+-(void)resignFirstResponderRecursively
+{
+  [self doResignFirstResponderRecursively];
+}
+
+// returns YES if first responder is hit
+-(BOOL)doResignFirstResponderRecursively
+{
+  if( self.isFirstResponder ) {
+    [self resignFirstResponder];
+    return YES;
+  } else {
+    for( UIView* child in self.subviews ) {
+      if( [child doResignFirstResponderRecursively] ) {
+        return YES;
+      }
+    }
+    return NO;
+  }
+}
+
 +(UIView*)loadFromNibNamed:(NSString*)nibName owner:(id)owner options:(NSDictionary*)opts
 {	
   NSString* deviceSpecific = nil;
