@@ -14,7 +14,7 @@
 {
   CGRect screenRect = self.bounds;
   
-  UIGraphicsBeginImageContext(screenRect.size);
+  UIGraphicsBeginImageContextWithOptions(screenRect.size, YES, [UIScreen mainScreen].scale);
   
   CGContextRef ctx = UIGraphicsGetCurrentContext();
   [[UIColor blackColor] set];

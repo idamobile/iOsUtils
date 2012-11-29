@@ -41,9 +41,13 @@
 
 -(UIImage*)cropFromRect:(CGRect)fromRect
 {
-  CGImageRef drawImage = CGImageCreateWithImageInRect(self.CGImage, fromRect);
-  UIImage* crop = [UIImage imageWithCGImage:drawImage];
-  CGImageRelease(drawImage);\
+  fromRect = CGRectMake(fromRect.origin.x * self.scale,
+                        fromRect.origin.y * self.scale,
+                        fromRect.size.width * self.scale,
+                        fromRect.size.height * self.scale);
+  CGImageRef imageRef = CGImageCreateWithImageInRect(self.CGImage, fromRect);
+  UIImage* crop = [UIImage imageWithCGImage:imageRef scale:self.scale orientation:self.imageOrientation];
+  CGImageRelease(imageRef);
   return crop;
 }
 
