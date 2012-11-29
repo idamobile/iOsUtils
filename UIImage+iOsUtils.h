@@ -12,4 +12,6 @@
 
 +(UIImage*)safeImageNamed:(NSString*)name;
 
+-(UIImage*)cropFromRect:(CGRect)fromRect;
+
 @end

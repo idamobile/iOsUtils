@@ -39,4 +39,12 @@
   return image;
 }
 
+-(UIImage*)cropFromRect:(CGRect)fromRect
+{
+  CGImageRef drawImage = CGImageCreateWithImageInRect(self.CGImage, fromRect);
+  UIImage* crop = [UIImage imageWithCGImage:drawImage];
+  CGImageRelease(drawImage);\
+  return crop;
+}
+
 @end
