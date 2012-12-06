@@ -10,6 +10,8 @@
 
 @interface ACAccountStore(iOsUtils)
 
++(BOOL)hasFbAccount;
+
 // Only calls completion on iOS < 6.0
 +(void)syncFbAccountCompletion:(void (^)())completion;
 

@@ -10,22 +10,35 @@
 
 @implementation ACAccountStore(iOsUtils)
 
-+(void)syncFbAccountCompletion:(void (^)())completion
++(ACAccount*)fbAccount
 {
   if( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0") ) {
     ACAccountStore* accountStore = [[ACAccountStore alloc] init];
     ACAccountType* accountTypeFB = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
     NSArray* fbAccounts = [accountStore accountsWithAccountType:accountTypeFB];
-    if( fbAccounts.count > 0 ) {
-      ACAccount* fbAccount = fbAccounts.firstObject;
-      [accountStore renewCredentialsForAccount:fbAccount completion:^(ACAccountCredentialRenewResult renewResult, NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), completion);
-      }];
-    } else {
-      dispatch_async(dispatch_get_main_queue(), completion);      
-    }
+    return [fbAccounts lastObject];
   } else {
-    dispatch_async(dispatch_get_main_queue(), completion);
+    return nil;
+  }
+}
+
++(BOOL)hasFbAccount
+{
+  return [self fbAccount] != nil;
+}
+
++(void)syncFbAccountCompletion:(void (^)())completion
+{
+  ACAccount* fbAccount = [self fbAccount];
+  if( fbAccount ) {
+    [[[ACAccountStore alloc] init] renewCredentialsForAccount:fbAccount
+                                                   completion:^(ACAccountCredentialRenewResult renewResult, NSError *error)
+    {
+      DLog( @"%@", [error description] );
+      dispatch_async(dispatch_get_main_queue(), completion);
+    }];
+  } else {
+    completion();
   }
 }
 
