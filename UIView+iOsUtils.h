@@ -25,6 +25,7 @@
 -(void)centerHorizontallyInContainer;
 -(void)centerVerticallyInContainer;
 
+-(UIResponder*)findFirstResponderRecursively;
 -(void)resignFirstResponderRecursively;
 
 +(UIView*)loadFromNibNamed:(NSString*)nibName owner:(id)owner options:(NSDictionary*)opts;
