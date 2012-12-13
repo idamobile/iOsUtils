@@ -8,6 +8,7 @@
 
 @interface UIColor(iOsUtils)
 
++(UIColor*)colorWithRGB:(int32_t)value alpha:(CGFloat)alpha;
 +(UIColor*)colorWithRGB:(int32_t)value;
 
 @end

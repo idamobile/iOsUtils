@@ -10,13 +10,18 @@
 
 @implementation UIColor(iOsUtils)
 
-+(UIColor*)colorWithRGB:(int32_t)value
++(UIColor*)colorWithRGB:(int32_t)value alpha:(CGFloat)alpha
 {
   Byte r = (value >> 16) & 255;
   Byte g = (value >> 8) & 255;
   Byte b = value & 255;
 
-  return [UIColor colorWithRed:( r / 255. ) green:( g / 255. ) blue:( b / 255. ) alpha:1.];
+  return [UIColor colorWithRed:(r / 255.) green:(g / 255.) blue:(b / 255.) alpha:alpha];
+}
+
++(UIColor*)colorWithRGB:(int32_t)value
+{
+  return [UIColor colorWithRGB:value alpha:1.];
 }
 
 @end
