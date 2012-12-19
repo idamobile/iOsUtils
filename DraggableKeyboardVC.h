@@ -10,6 +10,8 @@
 
 +(void)addDummyInputAccessoryView:(id)textFieldOrView;
 
+// Should not be changed while keyboard is dragging
+@property(nonatomic, assign) BOOL isDraggingDisabled;
 @property(nonatomic, strong) UIPanGestureRecognizer* draggingKeyboardPanGestureRecognizer;
 
 // Keyboard notifications handlers, always call super on override

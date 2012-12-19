@@ -30,6 +30,12 @@
   }
 }
 
+-(void)setIsDraggingDisabled:(BOOL)isDraggingDisabled
+{
+  NSAssert(!self.keyboardIsMoving, @"Property should not be changed while keyboard is dragging");
+  _isDraggingDisabled = isDraggingDisabled;
+}
+
 -(CGRect)openedKeyboardRect
 {
   return self.keyboardSuperFrame;
@@ -94,7 +100,7 @@
 
 -(void)panGesture:(UIPanGestureRecognizer*)gestureRecognizer
 {
-  if( !self.keyboardSuperView.superview ) {
+  if( !self.keyboardSuperView.superview || self.isDraggingDisabled ) {
     return;
   }
   if( gestureRecognizer.state == UIGestureRecognizerStateEnded && self.keyboardIsMoving ) {
