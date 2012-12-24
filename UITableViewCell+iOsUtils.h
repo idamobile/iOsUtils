@@ -7,8 +7,7 @@
 //
 
 #define UITableViewCellDeclareClassSpecificReuseId \
-+(NSString*)reuseId; \
--(NSString*)reuseIdentifier;
++(NSString*)reuseId;
 
 #define UITableViewCellDefineClassSpecificReuseId \
 +(NSString*)reuseId \
