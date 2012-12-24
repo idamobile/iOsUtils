@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 iDa Mobile. All rights reserved.
 //
 
+#import "UITableViewCell+iOsUtils.h"
+
 typedef enum {
   CP_Top,
   CP_Middle, // default
@@ -17,9 +19,7 @@ typedef enum {
 
 @interface PositionAwareCell : UITableViewCell
 
-// Return class name
-+(NSString*)reuseId;
--(NSString*)reuseIdentifier;
+UITableViewCellDeclareClassSpecificReuseId
 
 // CP_Middle by default
 @property(nonatomic, assign) e_CellPosition position;

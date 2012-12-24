@@ -10,15 +10,7 @@
 
 @implementation PositionAwareCell
 
-+(NSString*)reuseId
-{
-  return NSStringFromClass([self class]);
-}
-
--(NSString *)reuseIdentifier
-{
-  return [[self class] reuseId];
-}
+UITableViewCellDefineClassSpecificReuseId
 
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
