@@ -25,7 +25,9 @@ UITableViewCellDeclareClassSpecificReuseId
 @property(nonatomic, assign) e_CellPosition position;
 
 +(e_CellPosition)positionForRow:(NSInteger)row totalCellsInSection:(NSInteger)cellsInSection;
++(e_CellPosition)positionForTable:(UITableView*)tableView indexPath:(NSIndexPath*)indexPath;
 -(void)setCellPositionForRow:(NSInteger)row totalCellsInSection:(NSInteger)cellsInSection;
+-(void)setCellPositionForTable:(UITableView*)tableView indexPath:(NSIndexPath*)indexPath;
 
 // To override
 +(UIImage*)backgroundImageForPosition:(e_CellPosition)position;

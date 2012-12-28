@@ -60,9 +60,20 @@ UITableViewCellDefineClassSpecificReuseId
   }
 }
 
++(e_CellPosition)positionForTable:(UITableView*)tableView indexPath:(NSIndexPath*)indexPath
+{
+  NSInteger cellsInSection = [tableView.dataSource tableView:tableView numberOfRowsInSection:indexPath.section];
+  return [self positionForRow:indexPath.row totalCellsInSection:cellsInSection];
+}
+
 -(void)setCellPositionForRow:(NSInteger)row totalCellsInSection:(NSInteger)cellsInSection
 {
   self.position = [[self class] positionForRow:row totalCellsInSection:cellsInSection];
+}
+
+-(void)setCellPositionForTable:(UITableView*)tableView indexPath:(NSIndexPath*)indexPath
+{
+  self.position = [[self class] positionForTable:tableView indexPath:indexPath];
 }
 
 +(UIImage*)backgroundImageForPosition:(e_CellPosition)position
