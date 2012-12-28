@@ -74,6 +74,7 @@
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.keyboardSuperView.hidden = NO;
+  self.draggingKeyboardPanGestureRecognizer = nil;
 }
 
 #pragma mark - Keyboard Notifications

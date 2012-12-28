@@ -133,4 +133,12 @@
   return res;
 }
 
+-(void)dealloc
+{
+  self.regularFont = nil;
+  self.regularInputFont = nil;
+  self.boldFont = nil;
+  self.boldInputFont = nil;
+}
+
 @end
