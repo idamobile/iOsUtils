@@ -21,7 +21,7 @@
 
 -(void)dismissSelfAnimated:(BOOL)flag
 {
-  if( self.navigationController && self.navigationController.topViewController == self ) {
+  if( self.navigationController && (self.navigationController.topViewController == self || self.navigationController.topViewController == self.parentViewController) ) {
     if( self.navigationController.viewControllers.count == 1 ) {
       [self.navigationController dismissSelfAnimated:flag];
     } else {
