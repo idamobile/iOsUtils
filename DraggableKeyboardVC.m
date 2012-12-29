@@ -45,6 +45,7 @@
 {
   [super viewDidLoad];
   self.draggingKeyboardPanGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
+  self.draggingKeyboardPanGestureRecognizer.cancelsTouchesInView = NO;
   [self.view addGestureRecognizer:self.draggingKeyboardPanGestureRecognizer];
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(keyboardWillShow:)
