@@ -28,7 +28,7 @@
       [self.navigationController popViewControllerAnimated:flag];
     }
   } else if( self.presentingViewController && self.presentingViewController.presentedViewController == self ) {
-    [self dismissViewControllerAnimated:flag completion:^{}];
+    [self.presentingViewController dismissViewControllerAnimated:flag completion:^{}];
   }
 }
 
