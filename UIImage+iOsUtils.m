@@ -21,8 +21,8 @@
 	CGSize sz = img.size;
   
   if( [img respondsToSelector:@selector(resizableImageWithCapInsets:)] ) {
-    int left = (int)(sz.width / 2.);
-    int top = (int)(sz.height / 2.);
+    int left = (sz.width - 1.) / 2.;
+    int top = (sz.height - 1.) / 2.;
     //insets are symmetric
     return [img resizableImageWithCapInsets:UIEdgeInsetsMake( top, left, top, left )];
   } else {
