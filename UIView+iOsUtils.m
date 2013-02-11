@@ -131,6 +131,11 @@
 	self.frame = rc;
 }
 
+-(CGRect)convertBoundsToView:(UIView*)view
+{
+  return [self convertRect:self.bounds toView:view];
+}
+
 -(void)centerHorizontallyInContainer
 {
 	CGRect rcContainer = self.superview.bounds;

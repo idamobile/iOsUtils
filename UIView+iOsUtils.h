@@ -21,6 +21,8 @@
 // When setting the size, the anchor is the upper-left corner of the view.
 @property(nonatomic, assign) CGSize size;
 
+-(CGRect)convertBoundsToView:(UIView*)view;
+
 // Same as "Center horizontally in container" interface builder command.
 -(void)centerHorizontallyInContainer;
 -(void)centerVerticallyInContainer;
