@@ -24,7 +24,17 @@
 // Override it
 
 -(void)willHideDisplacedKeyboardAnimatedWithDuration:(CGFloat)animationDuration;
+// Called inside animation block, put here your custom animations
+-(void)hideDisplacedKeyboardAnimation:(CGFloat)animationDuration;
+// Called inside completion block of animation block
+-(void)didHideDisplacedKeyboard;
+
 -(void)willBringBackDisplacedKeyboard:(CGFloat)animationDuration;
+// Called inside animation block, put here your custom animations
+-(void)bringBackDisplacedKeyboardAnimation:(CGFloat)animationDuration;
+// Called inside completion block of animation block
+-(void)didBringBackDisplacedKeyboard;
+
 -(void)didShiftKeyboardViewBegin;
 -(void)didShiftKeyboardViewContinue:(CGFloat)shift;
 

@@ -137,16 +137,26 @@
                    animations:^
   {
     self.keyboardSuperView.y = [UIScreen mainScreen].bounds.size.height;
+    [self hideDisplacedKeyboardAnimation:animationDuration];
   }
                    completion:^(BOOL finished)
   {
     self.keyboardSuperView.hidden = YES;
     self.keyboardSuperView.frame = self.keyboardSuperFrame;
+    [self didHideDisplacedKeyboard];
     [self.view resignFirstResponderRecursively];
   }];
 }
 
 -(void)willHideDisplacedKeyboardAnimatedWithDuration:(CGFloat)animationDuration
+{
+}
+
+-(void)hideDisplacedKeyboardAnimation:(CGFloat)animationDuration
+{
+}
+
+-(void)didHideDisplacedKeyboard
 {
 }
 
@@ -158,13 +168,23 @@
                    animations:^
   {
     self.keyboardSuperView.frame = self.keyboardSuperFrame;
+    [self bringBackDisplacedKeyboardAnimation:animationDuration];
   }
                   completion:^(BOOL finished)
   {
+    [self didBringBackDisplacedKeyboard];
   }];
 }
 
 -(void)willBringBackDisplacedKeyboard:(CGFloat)animationDuration
+{
+}
+
+-(void)bringBackDisplacedKeyboardAnimation:(CGFloat)animationDuration
+{
+}
+
+-(void)didBringBackDisplacedKeyboard
 {
 }
 
