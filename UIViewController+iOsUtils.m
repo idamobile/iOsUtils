@@ -32,4 +32,9 @@
   }
 }
 
+-(void)dismissSelfAnimated
+{
+  [self dismissSelfAnimated:YES];
+}
+
 @end

@@ -14,5 +14,6 @@
 
 // Work for navigation controllers and when modally presented
 -(void)dismissSelfAnimated:(BOOL)flag;
+-(void)dismissSelfAnimated;
 
 @end
