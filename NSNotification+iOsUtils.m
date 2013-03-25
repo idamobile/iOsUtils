@@ -31,6 +31,12 @@
                name:UIKeyboardWillHideNotification
              object:nil];
   }
+  if( [delegate respondsToSelector:@selector( keyboardDidHide: )] ) {
+    [nc addObserver:delegate
+           selector:@selector( keyboardDidHide: )
+               name:UIKeyboardDidHideNotification
+             object:nil];
+  }
 }
 
 +(void)removeKeyboardObserver:(NSObject<KeyboardObserverDelegate>*)delegate
@@ -42,6 +48,8 @@
 		[ nc removeObserver:delegate name:UIKeyboardDidShowNotification object:nil ];
 	if( [ delegate respondsToSelector:@selector( keyboardWillHide: ) ] )
 		[ nc removeObserver:delegate name:UIKeyboardWillHideNotification object:nil ];
+	if( [ delegate respondsToSelector:@selector( keyboardDidHide: ) ] )
+		[ nc removeObserver:delegate name:UIKeyboardDidHideNotification object:nil ];
 }
 
 @end
