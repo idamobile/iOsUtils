@@ -30,6 +30,9 @@
 -(UIResponder*)findFirstResponderRecursively;
 -(void)resignFirstResponderRecursively;
 
+-(void)heightToFit;
+-(void)widthToFit;
+
 +(UIView*)loadFromNibNamed:(NSString*)nibName owner:(id)owner options:(NSDictionary*)opts;
 +(UIView*)loadFromNib;
 

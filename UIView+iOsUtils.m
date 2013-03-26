@@ -168,6 +168,16 @@
   [[self findFirstResponderRecursively] resignFirstResponder];
 }
 
+-(void)heightToFit
+{
+  self.height = [self sizeThatFits:self.bounds.size].height;
+}
+
+-(void)widthToFit
+{
+  self.width = [self sizeThatFits:self.bounds.size].width;
+}
+
 +(UIView*)loadFromNibNamed:(NSString*)nibName owner:(id)owner options:(NSDictionary*)opts
 {	
   NSString* deviceSpecific = nil;
