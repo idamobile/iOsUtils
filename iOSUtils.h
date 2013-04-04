@@ -14,7 +14,7 @@
 #import "DraggableKeyboardVC.h"
 #import "MKMapView+iOsUtils.h"
 #import "NSFileManager+iOsUtils.h"
-#import "NSManagedObjectContext+iOsUtils.h
+#import "NSManagedObjectContext+iOsUtils.h"
 #import "NSNotification+iOsUtils.h"
 #import "PositionAwareCell.h"
 #import "ScrollViewAutoresize.h"
@@ -30,3 +30,4 @@
 #import "UIViewController+iOsUtils.h"
 #import "UIWindow+iOsUtils.h"
 #import "ViewAutoresize.h"
+#import "NSArray+iOSUtils.h"
