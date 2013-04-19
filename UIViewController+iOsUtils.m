@@ -37,24 +37,4 @@
   [self dismissSelfAnimated:YES];
 }
 
--(void)displayError:(NSError*)error
-{
-	if( !error ) {
-		return;
-	}
-	[self displayErrorString:[error localizedDescription]];
-}
-
--(void)displayErrorString:(NSString*)string
-{
-	if( string.length == 0 ) {
-		return;
-	}
-  [[[UIAlertView alloc] initWithTitle:@"Error"
-                              message:string
-                             delegate:nil
-                    cancelButtonTitle:@"OK"
-                    otherButtonTitles:nil] show];
-}
-
 @end
