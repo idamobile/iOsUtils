@@ -170,12 +170,22 @@
 
 -(void)heightToFit
 {
-  self.height = [self sizeThatFits:self.bounds.size].height;
+  self.height = [self heightThatFits];
+}
+
+-(CGFloat)heightThatFits
+{
+  return [self sizeThatFits:self.bounds.size].height;
+}
+
+-(CGFloat)widthThatFits
+{
+  return [self sizeThatFits:self.bounds.size].width;
 }
 
 -(void)widthToFit
 {
-  self.width = [self sizeThatFits:self.bounds.size].width;
+  self.width = [self widthThatFits];
 }
 
 +(UIView*)loadFromNibNamed:(NSString*)nibName owner:(id)owner options:(NSDictionary*)opts
