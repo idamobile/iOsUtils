@@ -11,6 +11,11 @@
 
 @implementation UITextViewWithPlaceholder
 
++(UIColor*)defaultPlaceholderColor
+{
+  return [UIColor colorWithWhite:0.7 alpha:1];
+}
+
 -(id)initWithFrame:(CGRect)frame
 {
   self = [super initWithFrame:frame];
@@ -76,7 +81,7 @@
     if( self.placeholderColor ) {
       [self.placeholderColor set];
     } else {
-      [[UIColor colorWithWhite:0.7 alpha:1] set];
+      [[[self class] defaultPlaceholderColor] set];
     }
     [self.placeholderText drawInRect:CGRectMake(8, 8, self.width - 16, self.height - 16)
                             withFont:font];

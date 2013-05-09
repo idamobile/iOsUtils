@@ -8,6 +8,8 @@
 
 @interface UITextViewWithPlaceholder : UITextView
 
++(UIColor*)defaultPlaceholderColor;
+
 @property(nonatomic, copy) NSString* placeholderText;
 @property(nonatomic, strong) UIColor* placeholderColor;
 @property(nonatomic, strong) UIFont* placeholderFont;
