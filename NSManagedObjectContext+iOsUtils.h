@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 iDa Mobile. All rights reserved.
 //
 
+#import <CoreData/CoreData.h>
+
 @interface NSManagedObjectContext(iOsUtils)
 
 -(NSSet*)fetchObjectsForEntityName:(NSString*)newEntityName

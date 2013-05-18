@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 iDa Mobile. All rights reserved.
 //
 
+#import <MapKit/MapKit.h>
+
 @interface MKMapView(iOsUtils)
 
 -(void)relocateCopyrightLogoForVisibleRect:(CGRect)rect;
