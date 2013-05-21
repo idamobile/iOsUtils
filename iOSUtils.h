@@ -31,3 +31,4 @@
 #import "UIWindow+iOsUtils.h"
 #import "ViewAutoresize.h"
 #import "NSArray+iOSUtils.h"
+#import "UITextFieldNoPaste.h"
