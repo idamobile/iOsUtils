@@ -35,7 +35,7 @@
 -(CGFloat)widthThatFits;
 -(void)widthToFit;
 
-+(UIView*)loadFromNibNamed:(NSString*)nibName owner:(id)owner options:(NSDictionary*)opts;
-+(UIView*)loadFromNib;
++(instancetype)loadFromNibNamed:(NSString*)nibName owner:(id)owner options:(NSDictionary*)opts;
++(instancetype)loadFromNib;
 
 @end

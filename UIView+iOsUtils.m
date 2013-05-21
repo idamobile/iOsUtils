@@ -188,7 +188,7 @@
   self.width = [self widthThatFits];
 }
 
-+(UIView*)loadFromNibNamed:(NSString*)nibName owner:(id)owner options:(NSDictionary*)opts
++(instancetype)loadFromNibNamed:(NSString*)nibName owner:(id)owner options:(NSDictionary*)opts
 {	
   NSString* deviceSpecific = nil;
   if( [UIDevice isPad] ) {
@@ -219,7 +219,7 @@
   return nil;
 }
 
-+(UIView*)loadFromNib
++(instancetype)loadFromNib
 {
   return [self loadFromNibNamed:NSStringFromClass(self) owner:nil options:nil];
 }
