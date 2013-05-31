@@ -32,3 +32,5 @@
 #import "ViewAutoresize.h"
 #import "NSArray+iOSUtils.h"
 #import "UITextFieldNoPaste.h"
+#import "UITextFieldCustomPlaceholder.h"
+

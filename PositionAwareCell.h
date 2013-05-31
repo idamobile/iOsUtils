@@ -24,7 +24,10 @@ UITableViewCellDeclareClassSpecificReuseId
 // CP_Middle by default
 @property(nonatomic, assign) e_CellPosition position;
 
+// You can override this function
 +(e_CellPosition)positionForRow:(NSInteger)row totalCellsInSection:(NSInteger)cellsInSection;
+
+// Shortcuts
 +(e_CellPosition)positionForTable:(UITableView*)tableView indexPath:(NSIndexPath*)indexPath;
 -(void)setCellPositionForRow:(NSInteger)row totalCellsInSection:(NSInteger)cellsInSection;
 -(void)setCellPositionForTable:(UITableView*)tableView indexPath:(NSIndexPath*)indexPath;
