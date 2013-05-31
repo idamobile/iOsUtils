@@ -61,6 +61,19 @@
   [self setNeedsDisplay];
 }
 
+-(CGRect)caretRectForPosition:(UITextPosition*)position
+{
+  CGRect result = [super caretRectForPosition:position];
+  if( self.text.length == 0 ) {
+    UIFont* font = self.placeholderFont ? self.placeholderFont : self.font;
+    CGSize placeholderSize = [self.customPlaceholder sizeWithFont:font
+                                                constrainedToSize:CGSizeMake(self.width - 8, self.height - 4)
+                                                    lineBreakMode:NSLineBreakByWordWrapping];
+    return CGRectMake((self.width + placeholderSize.width) / 2, result.origin.y, result.size.width, result.size.height);
+  }
+  return result;
+}
+
 -(void)setPlaceholder:(NSString*)placeholder
 {
   _customPlaceholder = [placeholder copy];
