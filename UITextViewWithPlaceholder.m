@@ -84,7 +84,9 @@
       [[[self class] defaultPlaceholderColor] set];
     }
     [self.placeholderText drawInRect:CGRectMake(8, 8, self.width - 16, self.height - 16)
-                            withFont:font];
+                            withFont:font
+                       lineBreakMode:NSLineBreakByWordWrapping
+                           alignment:self.textAlignment];
   }
 }
 
