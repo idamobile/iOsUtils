@@ -148,6 +148,21 @@
 	self.y = floorf( ( rcContainer.size.height - self.height ) / 2 );
 }
 
+-(UIView*)findSubviewRecursivelyOfClass:(Class)subviewClass
+{
+  if( [self isKindOfClass:subviewClass] ) {
+    return self;
+  } else {
+    for( UIView* child in self.subviews ) {
+      UIView* result = [child findSubviewRecursivelyOfClass:subviewClass];
+      if( result ) {
+        return result;
+      }
+    }
+    return nil;
+  }
+}
+
 -(UIResponder*)findFirstResponderRecursively
 {
   if( self.isFirstResponder ) {

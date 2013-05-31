@@ -27,6 +27,7 @@
 -(void)centerHorizontallyInContainer;
 -(void)centerVerticallyInContainer;
 
+-(UIView*)findSubviewRecursivelyOfClass:(Class)subviewClass;
 -(UIResponder*)findFirstResponderRecursively;
 -(void)resignFirstResponderRecursively;
 
