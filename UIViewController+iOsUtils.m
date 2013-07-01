@@ -37,4 +37,15 @@
   [self dismissSelfAnimated:YES];
 }
 
+-(UIViewController*)presentationHierarchyTopSuccessor
+{
+  if( self.navigationController && self.navigationController.viewControllers.count > 0 ) {
+    return [[self.navigationController topViewController] presentationHierarchyTopSuccessor];
+  } else if( self.presentedViewController ) {
+    return [self.presentedViewController presentationHierarchyTopSuccessor];
+  } else {
+    return self;
+  }
+}
+
 @end

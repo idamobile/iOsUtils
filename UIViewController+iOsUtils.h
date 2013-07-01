@@ -16,4 +16,6 @@
 -(void)dismissSelfAnimated:(BOOL)flag;
 -(void)dismissSelfAnimated;
 
+-(UIViewController*)presentationHierarchyTopSuccessor;
+
 @end
