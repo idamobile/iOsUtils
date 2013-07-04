@@ -34,7 +34,7 @@
   
   NSError* error = nil;
   NSArray* results = [self executeFetchRequest:request error:&error];
-  if( error ) {
+  if( !results ) {
     [NSException raise:NSGenericException format:error.description];
   }
   

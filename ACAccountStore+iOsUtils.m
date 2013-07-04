@@ -34,8 +34,8 @@
     [[[ACAccountStore alloc] init] renewCredentialsForAccount:fbAccount
                                                    completion:^(ACAccountCredentialRenewResult renewResult, NSError *error)
     {
-      if( error ) {
-        DLog( @"%@", [error description] );
+      if( renewResult == ACAccountCredentialRenewResultFailed ) {
+        DLog(@"%@", [error description]);
       }
       dispatch_async(dispatch_get_main_queue(), completion);
     }];
