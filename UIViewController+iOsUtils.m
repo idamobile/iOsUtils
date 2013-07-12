@@ -13,7 +13,9 @@
 -(void)dismissPresentedViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion
 {
   if( !self.presentedViewController ) {
-    completion();
+    if( completion ) {
+      completion();
+    }
   } else {
     [self dismissViewControllerAnimated:flag completion:completion];
   }
