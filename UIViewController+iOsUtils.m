@@ -23,11 +23,20 @@
 
 -(void)dismissSelfAnimated:(BOOL)flag
 {
-  if( self.navigationController && (self.navigationController.topViewController == self || self.navigationController.topViewController == self.parentViewController) ) {
-    if( self.navigationController.viewControllers.count == 1 ) {
+  NSUInteger indexOfSelf = NSNotFound;
+  UIViewController* previousVC = nil;
+  if( self.navigationController ) {
+    NSArray* viewControllers = self.navigationController.viewControllers;
+    indexOfSelf = [viewControllers indexOfObject:self];
+    if( indexOfSelf != NSNotFound && indexOfSelf > 0 ) {
+      previousVC = viewControllers[indexOfSelf - 1];
+    }
+  }
+  if( self.navigationController && indexOfSelf != NSNotFound ) {
+    if( !previousVC ) {
       [self.navigationController dismissSelfAnimated:flag];
     } else {
-      [self.navigationController popViewControllerAnimated:flag];
+      [self.navigationController popToViewController:previousVC animated:YES];
     }
   } else if( self.presentingViewController && self.presentingViewController.presentedViewController == self ) {
     [self.presentingViewController dismissViewControllerAnimated:flag completion:^{}];
