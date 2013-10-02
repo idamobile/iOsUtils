@@ -14,6 +14,7 @@
 @property(nonatomic, assign) CGRect keyboardSuperFrame;
 @property(nonatomic, weak) UIView* keyboardSuperView;
 @property(nonatomic, assign) BOOL keyboardIsMoving;
+@property(nonatomic, assign) BOOL blockGesture;
 
 @end
 
@@ -83,10 +84,12 @@
 -(void)keyboardWillShow:(NSNotification*)notification
 {
   self.keyboardSuperView.hidden = NO;
+  self.blockGesture = NO;
 }
 
 -(void)keyboardWillHide:(NSNotification*)notification
 {
+  self.blockGesture = YES;
 }
 
 -(void)keyboardDidShow:(NSNotification*)notification
@@ -102,7 +105,7 @@
 
 -(void)panGesture:(UIPanGestureRecognizer*)gestureRecognizer
 {
-  if( !self.keyboardSuperView.superview || self.isDraggingDisabled ) {
+  if( !self.keyboardSuperView.superview || self.isDraggingDisabled || self.blockGesture ) {
     return;
   }
   if( gestureRecognizer.state == UIGestureRecognizerStateEnded && self.keyboardIsMoving ) {
@@ -131,7 +134,7 @@
 
 -(void)hideDisplacedKeyboard
 {
-  CGFloat animationDuration = 0.2;
+  CGFloat animationDuration = 0.3;
   [self willHideDisplacedKeyboardAnimatedWithDuration:animationDuration];
   [UIView animateWithDuration:animationDuration
                    animations:^
@@ -162,7 +165,7 @@
 
 -(void)bringBackDisplacedKeyboard
 {
-  CGFloat animationDuration = 0.2;
+  CGFloat animationDuration = 0.3;
   [self willBringBackDisplacedKeyboard:animationDuration];
   [UIView animateWithDuration:animationDuration
                    animations:^
