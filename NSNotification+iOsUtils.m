@@ -66,6 +66,13 @@
     return duration;
 }
 
+-(UIViewAnimationOptions)keyboardAnimationOptions
+{
+  UIViewAnimationCurve animationCurve = (UIViewAnimationCurve)[self.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
+  // The undocumented UIViewAnimationCurve value (7) is used for keyboard animation in iOS 7
+  return (UIViewAnimationOptions)(animationCurve << 16);
+}
+
 -(CGSize)keyboardSize
 {
   NSDictionary* info = [ self userInfo ];

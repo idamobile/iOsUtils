@@ -21,5 +21,6 @@
 
 @interface NSNotification (iOsUtils)
 -(NSTimeInterval)keyboardAnimationDuration;
+-(UIViewAnimationOptions)keyboardAnimationOptions;
 -(CGSize)keyboardSize;
 @end
