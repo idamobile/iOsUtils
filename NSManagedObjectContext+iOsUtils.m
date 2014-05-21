@@ -35,7 +35,10 @@
   NSError* error = nil;
   NSArray* results = [self executeFetchRequest:request error:&error];
   if( !results ) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wformat-security"    
     [NSException raise:NSGenericException format:error.description];
+#pragma clang diagnostic pop    
   }
   
   return [NSSet setWithArray:results];
