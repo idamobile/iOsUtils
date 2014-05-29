@@ -14,6 +14,8 @@
 
 @interface ATInflector ()<NSXMLParserDelegate>
 @property (atomic, strong) NSMutableDictionary* dict;
+@property (atomic, strong) NSMutableSet* pendingNames;
+@property (atomic, strong) NSLock* lock;
 @end
 
 @implementation ATInflector
@@ -30,44 +32,76 @@
 {
   self = [super init];
   if (self != nil)
+  {
     self.dict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:kDefaultsKey]];
+    self.pendingNames = [NSMutableSet set];
+    self.lock = [[NSLock alloc] init];
+  }
   return self;
 }
 
 - (NSString*)inflectionForName:(NSString*)name withCase:(kInflectionCase)infCase completion:(void (^)(NSString* result))completion
 {
-  if ([name length] > 0)
-  {
-    NSDictionary* dict = self.dict[name];
-    if (dict != nil)
-      return [self resultFromDict:dict withCase:infCase fallback:name];
-  }
-  else
-    return name;
+  if ([name length] == 0) return name;
+
+  [self.lock lock];
+  NSDictionary* dict = self.dict[name];
+  [self.lock unlock];
+  if (dict != nil)
+    return [self resultFromDict:dict withCase:infCase fallback:name];
 
   if (completion != nil)
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-      NSString* urlStr = [kBaseUrl stringByAppendingString:name];
-      urlStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-      NSXMLParser* parser = [[NSXMLParser alloc] initWithContentsOfURL:[NSURL URLWithString:urlStr]];
-      parser.delegate = self;
-      objc_setAssociatedObject(parser, "key", name, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-      [parser parse];
+  {
+    BOOL pending = NO;
 
-      dispatch_async(dispatch_get_main_queue(), ^{
-        completion([self resultFromDict:self.dict[name] withCase:infCase fallback:name]);
-      });
-
-      // Save for future reuse
-      @synchronized(self)
+    [self.lock lock];
+    for (NSString* iname in self.pendingNames)
+    {
+      if ([iname isEqualToString:name])
       {
+        pending = YES;
+        break;
+      }
+    }
+    [self.lock unlock];
+
+    if (!pending)
+    {
+      [self.lock lock];
+      [self.pendingNames addObject:name];
+      [self.lock unlock];
+
+      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+      {
+        NSString* urlStr = [kBaseUrl stringByAppendingString:name];
+        urlStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+        NSXMLParser* parser = [[NSXMLParser alloc] initWithContentsOfURL:[NSURL URLWithString:urlStr]];
+        parser.delegate = self;
+        objc_setAssociatedObject(parser, "key", name, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        [parser parse];
+
+        [self.lock lock];
+        NSString* result = [self resultFromDict:self.dict[name] withCase:infCase fallback:name];
+        [self.lock unlock];
+
+        if (![result isEqualToString:name])
+          dispatch_async(dispatch_get_main_queue(), ^{
+            completion(result);
+          });
+
+        // Save for future reuse
+        [self.lock lock];
         if (self.dict[name] != nil)
         {
           [[NSUserDefaults standardUserDefaults] setObject:self.dict forKey:kDefaultsKey];
           [[NSUserDefaults standardUserDefaults] synchronize];
         }
-      }
-    });
+        [self.pendingNames removeObject:name];
+        [self.lock unlock];
+      });
+    }
+  }
 
   return name;
 }
@@ -82,9 +116,8 @@
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
-  @synchronized(self)
-  {
-    NSString* key = objc_getAssociatedObject(parser, "key");
+  [self.lock lock];
+  NSString* key = objc_getAssociatedObject(parser, "key");
     NSMutableDictionary* dict = self.dict[key];
     if (dict == nil)
     {
@@ -92,7 +125,7 @@
       self.dict[key] = dict;
     }
     dict[[NSString stringWithFormat:@"%d", [dict count]]] = string;
-  }
+  [self.lock unlock];
 }
 
 + (NSString*)inflectionForName:(NSString*)name withCase:(kInflectionCase)infCase completion:(void (^)(NSString* result))completion
