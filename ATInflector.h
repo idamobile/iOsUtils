@@ -18,5 +18,5 @@ typedef enum : NSInteger {
 } kInflectionCase;
 
 @interface ATInflector : NSObject
-+ (void)getInflectionsForName:(NSString*)name withCase:(kInflectionCase)infCase completion:(void (^)(NSString* result))completion;
++ (NSString*)inflectionForName:(NSString*)name withCase:(kInflectionCase)infCase completion:(void (^)(NSString* result))completion;
 @end

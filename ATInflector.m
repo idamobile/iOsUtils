@@ -34,42 +34,42 @@
   return self;
 }
 
-- (void)getInflectionsForName:(NSString*)name withCase:(kInflectionCase)infCase completion:(void (^)(NSString* result))completion
+- (NSString*)inflectionForName:(NSString*)name withCase:(kInflectionCase)infCase completion:(void (^)(NSString* result))completion
 {
-  if ([name length] > 0 && completion != nil)
+  if ([name length] > 0)
+  {
+    NSDictionary* dict = self.dict[name];
+    if (dict != nil)
+      return [self resultFromDict:dict withCase:infCase fallback:name];
+  }
+  else
+    return name;
+
+  if (completion != nil)
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-      NSDictionary* dict = self.dict[name];
-      if (dict != nil)
-      {
-        // Cached
-        dispatch_async(dispatch_get_main_queue(), ^{
-          completion([self resultFromDict:dict withCase:infCase fallback:name]);
-        });
-      }
-      else
-      {
-        NSString* urlStr = [kBaseUrl stringByAppendingString:name];
-        urlStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSXMLParser* parser = [[NSXMLParser alloc] initWithContentsOfURL:[NSURL URLWithString:urlStr]];
-        parser.delegate = self;
-        objc_setAssociatedObject(parser, "key", name, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        [parser parse];
+      NSString* urlStr = [kBaseUrl stringByAppendingString:name];
+      urlStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+      NSXMLParser* parser = [[NSXMLParser alloc] initWithContentsOfURL:[NSURL URLWithString:urlStr]];
+      parser.delegate = self;
+      objc_setAssociatedObject(parser, "key", name, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+      [parser parse];
 
-        dispatch_async(dispatch_get_main_queue(), ^{
-          completion([self resultFromDict:self.dict[name] withCase:infCase fallback:name]);
-        });
+      dispatch_async(dispatch_get_main_queue(), ^{
+        completion([self resultFromDict:self.dict[name] withCase:infCase fallback:name]);
+      });
 
-        // Save for future reuse
-        @synchronized(self)
+      // Save for future reuse
+      @synchronized(self)
+      {
+        if (self.dict[name] != nil)
         {
-          if (self.dict[name] != nil)
-          {
-            [[NSUserDefaults standardUserDefaults] setObject:self.dict forKey:kDefaultsKey];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-          }
+          [[NSUserDefaults standardUserDefaults] setObject:self.dict forKey:kDefaultsKey];
+          [[NSUserDefaults standardUserDefaults] synchronize];
         }
       }
     });
+
+  return name;
 }
 
 - (NSString*)resultFromDict:(NSDictionary*)dict withCase:(kInflectionCase)infCase fallback:(NSString*)string
@@ -95,9 +95,9 @@
   }
 }
 
-+ (void)getInflectionsForName:(NSString*)name withCase:(kInflectionCase)infCase completion:(void (^)(NSString* result))completion
++ (NSString*)inflectionForName:(NSString*)name withCase:(kInflectionCase)infCase completion:(void (^)(NSString* result))completion
 {
-  [[[self class] sharedInstance] getInflectionsForName:name withCase:infCase completion:completion];
+  return [[[self class] sharedInstance] inflectionForName:name withCase:infCase completion:completion];
 }
 
 @end
