@@ -204,14 +204,14 @@
 }
 
 +(instancetype)loadFromNibNamed:(NSString*)nibName owner:(id)owner options:(NSDictionary*)opts
-{	
+{
   NSString* deviceSpecific = nil;
   if( [UIDevice isPad] ) {
     deviceSpecific = [nibName stringByAppendingString:@"~iPad"];
   } else {
     deviceSpecific = [nibName stringByAppendingString:@"~iPhone"];
   }
-	
+
   NSString* chosenPath = nil;
   if( [[NSBundle mainBundle] pathForResource:deviceSpecific ofType:@"nib"] ) {
     chosenPath = deviceSpecific;
@@ -221,7 +221,7 @@
     DLog( @"Nib named %@ not found", nibName );
     return nil;
   }
-  
+
   NSArray* nibViews = [[NSBundle mainBundle] loadNibNamed:chosenPath owner:owner options:opts];
   for( NSObject* currentObject in nibViews ) {
     if( [currentObject isKindOfClass:self] ) {

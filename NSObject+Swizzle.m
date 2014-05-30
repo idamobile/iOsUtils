@@ -3,7 +3,7 @@
 
 @implementation NSObject (Swizzle)
 
-+ (void) swizzleInstanceSelector:(SEL)originalSelector 
++ (void) swizzleInstanceSelector:(SEL)originalSelector
                  withNewSelector:(SEL)newSelector
 {
   Method originalMethod = class_getInstanceMethod(self, originalSelector);
@@ -13,10 +13,10 @@
                                      originalSelector,
                                      method_getImplementation(newMethod),
                                      method_getTypeEncoding(newMethod));
-  
+
   if (methodAdded) {
-    class_replaceMethod([self class], 
-                        newSelector, 
+    class_replaceMethod([self class],
+                        newSelector,
                         method_getImplementation(originalMethod),
                         method_getTypeEncoding(originalMethod));
   } else {

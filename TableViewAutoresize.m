@@ -33,7 +33,7 @@
 -(void)keyboardDidShow:(NSNotification*)notification
 {
   if( !self.heightNoKeyboard ) {
-      self.heightNoKeyboard = self.height; 
+      self.heightNoKeyboard = self.height;
   }
   CGRect keyboardFrame;
   [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardFrame];

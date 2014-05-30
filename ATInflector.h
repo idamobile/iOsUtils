@@ -11,7 +11,7 @@
 typedef enum : NSInteger {
   kInflectionCaseNominative = 1,
   kInflectionCaseGenitive,
-  kInflectionCaseDative,  
+  kInflectionCaseDative,
   kInflectionCaseAccusative,
   kInflectionCaseInstrumental,
   kInflectionCasePrepositional

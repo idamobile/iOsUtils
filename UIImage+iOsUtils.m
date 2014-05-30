@@ -17,9 +17,9 @@
 		DLog( @"Warning: image named %@ was not found in the main bundle", name );
 		return nil;
 	}
-	
+
 	CGSize sz = img.size;
-  
+
   if( [img respondsToSelector:@selector(resizableImageWithCapInsets:)] ) {
     int left = (sz.width - 1.) / 2.;
     int top = (sz.height - 1.) / 2.;
