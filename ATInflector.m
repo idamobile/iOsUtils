@@ -85,7 +85,7 @@
         NSString* result = [self resultFromDict:self.dict[name] withCase:infCase fallback:name];
         [self.lock unlock];
 
-        if (![result isEqualToString:name])
+        if (self.dict[name] != nil)
           dispatch_async(dispatch_get_main_queue(), ^{
             completion(result);
           });
