@@ -52,6 +52,9 @@
 
 -(void)handleTextChange:(NSNotification*)notification
 {
+  if ([self.text length] > 255)
+    self.text = [self.text substringToIndex:255];
+
   [self setNeedsDisplay];
 }
 
