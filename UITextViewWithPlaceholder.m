@@ -86,10 +86,14 @@
     } else {
       [[[self class] defaultPlaceholderColor] set];
     }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#pragma clang diagnostic ignored "-Wenum-conversion"
     [self.placeholderText drawInRect:CGRectMake(8, 8, self.width - 16, self.height - 16)
                             withFont:font
                        lineBreakMode:NSLineBreakByWordWrapping
                            alignment:self.textAlignment];
+#pragma clang diagnostic pop
   }
 }
 

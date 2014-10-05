@@ -12,7 +12,7 @@
 {
   const char *cStr = [self bytes];
   unsigned char result[CC_SHA256_DIGEST_LENGTH];
-  CC_SHA256(cStr, strlen(cStr), result);
+  CC_SHA256(cStr, (unsigned int)strlen(cStr), result);
   NSMutableString* s = [NSMutableString stringWithCapacity:2 * CC_SHA256_DIGEST_LENGTH];
   for( int i = 0; i < CC_SHA256_DIGEST_LENGTH; ++i ) {
     [s appendFormat:@"%02X", result[i]];

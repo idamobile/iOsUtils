@@ -108,7 +108,7 @@
 
 - (NSString*)resultFromDict:(NSDictionary*)dict withCase:(kInflectionCase)infCase fallback:(NSString*)string
 {
-  NSString* str = dict[[NSString stringWithFormat:@"%d", infCase]];
+  NSString* str = dict[[NSString stringWithFormat:@"%ld", infCase]];
   if (str == nil)
     str = string;
   return str;
@@ -124,7 +124,7 @@
       dict = [NSMutableDictionary dictionary];
       self.dict[key] = dict;
     }
-    dict[[NSString stringWithFormat:@"%d", [dict count]]] = string;
+    dict[[NSString stringWithFormat:@"%lu", (unsigned long)[dict count]]] = string;
   [self.lock unlock];
 }
 

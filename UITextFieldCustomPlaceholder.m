@@ -66,9 +66,13 @@
   CGRect result = [super caretRectForPosition:position];
   if( self.text.length == 0 ) {
     UIFont* font = self.placeholderFont ? self.placeholderFont : self.font;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#pragma clang diagnostic ignored "-Wenum-conversion"
     CGSize placeholderSize = [self.customPlaceholder sizeWithFont:font
                                                 constrainedToSize:CGSizeMake(self.width - 8, self.height - 4)
                                                     lineBreakMode:NSLineBreakByWordWrapping];
+#pragma clang diagnostic pop    
     return CGRectMake((self.width + placeholderSize.width) / 2, result.origin.y, result.size.width, result.size.height);
   }
   return result;
@@ -103,6 +107,9 @@
     } else {
       [[[self class] defaultPlaceholderColor] set];
     }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#pragma clang diagnostic ignored "-Wenum-conversion"
     CGSize placeholderSize = [self.customPlaceholder sizeWithFont:font
                                                 constrainedToSize:CGSizeMake(self.width - 8, self.height - 4)
                                                     lineBreakMode:NSLineBreakByWordWrapping];
@@ -111,6 +118,7 @@
                               withFont:font
                          lineBreakMode:NSLineBreakByWordWrapping
                              alignment:self.textAlignment];
+#pragma clang diagnostic pop
   }
 }
 
