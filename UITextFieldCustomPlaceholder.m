@@ -72,7 +72,7 @@
     CGSize placeholderSize = [self.customPlaceholder sizeWithFont:font
                                                 constrainedToSize:CGSizeMake(self.width - 8, self.height - 4)
                                                     lineBreakMode:NSLineBreakByWordWrapping];
-#pragma clang diagnostic pop    
+#pragma clang diagnostic pop
     return CGRectMake((self.width + placeholderSize.width) / 2, result.origin.y, result.size.width, result.size.height);
   }
   return result;

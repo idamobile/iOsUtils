@@ -43,7 +43,8 @@ UITableViewCellDefineClassSpecificReuseId
   NSAssert(position != CP_Count, @"CP_Count is auxiliary value");
   UIImage* image = [self.class backgroundImageForPosition:position];
   self.backgroundView = [[UIImageView alloc] initWithImage:image];
-  self.selectedBackgroundView = [[UIImageView alloc] initWithImage:image];
+  self.selectionStyle = UITableViewCellSelectionStyleNone;
+// self.selectedBackgroundView = [[UIImageView alloc] initWithImage:image];
 }
 
 +(e_CellPosition)positionForRow:(NSInteger)row totalCellsInSection:(NSInteger)cellsInSection
