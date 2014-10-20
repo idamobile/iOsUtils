@@ -108,7 +108,7 @@
 
 - (NSString*)resultFromDict:(NSDictionary*)dict withCase:(kInflectionCase)infCase fallback:(NSString*)string
 {
-  NSString* str = dict[[NSString stringWithFormat:@"%ld", infCase]];
+  NSString* str = dict[[NSString stringWithFormat:@"%ld", (long)infCase]];
   if (str == nil)
     str = string;
   return str;
