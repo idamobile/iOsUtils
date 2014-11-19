@@ -31,4 +31,11 @@
   return [calendar dateByAddingComponents:components toDate:beginningOfTheDay options:0];
 }
 
+-(NSDate*)beginningOfTheDay
+{
+  NSCalendar* calendar = [NSCalendar currentCalendar];
+  NSDateComponents* selfComponents = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit fromDate:self];
+  return [calendar dateFromComponents:selfComponents];
+}
+
 @end

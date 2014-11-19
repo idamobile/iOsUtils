@@ -8,8 +8,8 @@
 
 +(instancetype)dateWithUnixMillisecondsTimestamp:(int64_t)timestamp;
 
-
 -(int64_t)unixMillisecondsTimestamp;
 -(NSDate*)beginningOfTheDayNumberOfDaysBefore:(NSUInteger)numberOfDaysBefore numberOfMonthsBefore:(NSUInteger)numberOfMonthsBefore;
+-(NSDate*)beginningOfTheDay;
 
 @end
