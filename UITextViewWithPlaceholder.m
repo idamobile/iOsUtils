@@ -89,7 +89,7 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 #pragma clang diagnostic ignored "-Wenum-conversion"
-    [self.placeholderText drawInRect:CGRectMake(8, 8, self.width - 16, self.height - 16)
+    [self.placeholderText drawInRect:CGRectMake(2., 7., self.width, self.height)
                             withFont:font
                        lineBreakMode:NSLineBreakByWordWrapping
                            alignment:self.textAlignment];
